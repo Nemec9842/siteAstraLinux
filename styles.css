@@ -81,10 +81,22 @@ h2 {
     background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%), url('maxresdefault.jpg');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     color: white;
     padding: 160px 0 100px;
     text-align: center;
     position: relative;
+    min-height: 500px;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    border-radius: 10px;
 }
 
 .hero-content h1 {
@@ -119,12 +131,18 @@ h2 {
     box-shadow: 0 6px 8px rgba(0,0,0,0.15);
 }
 
-/* О системе */
+/* О системе - ИСПРАВЛЕНО: картинка сбоку */
 .about-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
+    display: flex;
+    flex-direction: row;
     gap: 3rem;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.about-text {
+    flex: 2;
+    min-width: 0; /* Для корректной работы flex */
 }
 
 .about-text p {
@@ -133,10 +151,17 @@ h2 {
     line-height: 1.8;
 }
 
+.about-image {
+    flex: 1;
+    min-width: 300px;
+    margin-top: 0;
+}
+
 .about-img {
     width: 100%;
-    height: 300px;
-    object-fit: cover;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
@@ -159,6 +184,7 @@ h2 {
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     text-align: center;
     transition: transform 0.3s;
+    overflow: hidden;
 }
 
 .feature-card:hover {
@@ -170,7 +196,11 @@ h2 {
     margin-bottom: 1rem;
 }
 
-/* Редакции */
+.feature-card p {
+    word-wrap: break-word;
+}
+
+/* Редакции - ИСПРАВЛЕНО: разделение картинки и текста */
 .versions-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -179,18 +209,20 @@ h2 {
 
 .version-card {
     background: white;
-    padding: 0 0 2rem 0;
+    padding: 0;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     border-top: 4px solid #e74c3c;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .version-image {
     height: 200px;
     width: 100%;
     overflow: hidden;
-    margin-bottom: 1.5rem;
+    flex-shrink: 0;
 }
 
 .version-image img {
@@ -204,26 +236,33 @@ h2 {
     transform: scale(1.05);
 }
 
+.version-card-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 .version-card h3 {
     color: #2c3e50;
     margin-bottom: 1rem;
-    padding: 0 2rem;
 }
 
 .version-card p {
-    padding: 0 2rem;
     margin-bottom: 1rem;
+    flex-grow: 1;
 }
 
 .version-card ul {
     list-style: none;
-    margin-top: 1rem;
-    padding: 0 2rem;
+    margin-top: auto;
+    padding: 0;
 }
 
 .version-card li {
     padding: 0.5rem 0;
     border-bottom: 1px solid #eee;
+    word-wrap: break-word;
 }
 
 .version-card li:before {
@@ -233,14 +272,16 @@ h2 {
 }
 
 .version-placeholder {
-    background: #667eea;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
+    text-align: center;
+    padding: 1rem;
 }
 
 /* Преимущества */
@@ -265,6 +306,7 @@ h2 {
     border-radius: 10px;
     backdrop-filter: blur(10px);
     transition: transform 0.3s;
+    overflow: hidden;
 }
 
 .advantage-item:hover {
@@ -275,6 +317,10 @@ h2 {
 .advantage-item h4 {
     color: white;
     margin-bottom: 1rem;
+}
+
+.advantage-item p {
+    word-wrap: break-word;
 }
 
 /* Футер */
@@ -320,13 +366,46 @@ footer {
 }
 
 /* Адаптивность */
+@media (max-width: 1024px) {
+    .about-content {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .about-image {
+        min-width: 100%;
+        order: 2;
+    }
+    
+    .about-text {
+        order: 1;
+    }
+    
+    .about-img {
+        max-height: 350px;
+    }
+}
+
 @media (max-width: 768px) {
     .nav-menu {
         display: none;
     }
     
+    .hero {
+        padding: 140px 0 80px;
+        min-height: 400px;
+    }
+    
+    .hero-content {
+        padding: 1.5rem;
+    }
+    
     .hero-content h1 {
         font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
     }
     
     .about-content {
@@ -346,15 +425,37 @@ footer {
         font-size: 2rem;
     }
     
-    .hero {
-        padding: 140px 0 80px;
-    }
-    
     .about-img {
-        height: 250px;
+        max-height: 300px;
     }
     
     .version-image {
         height: 180px;
+    }
+    
+    .about-image {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .about-img {
+        max-height: 250px;
+    }
+    
+    .version-image {
+        height: 150px;
+    }
+    
+    .feature-card, .version-card-content, .advantage-item {
+        padding: 1.5rem;
     }
 }
