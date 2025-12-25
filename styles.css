@@ -78,22 +78,27 @@ h2 {
 
 /* Герой секция */
 .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%), url('maxresdefault.jpg');
+    background-size: cover;
+    background-position: center;
     color: white;
     padding: 160px 0 100px;
     text-align: center;
+    position: relative;
 }
 
 .hero-content h1 {
     font-size: 3.5rem;
     margin-bottom: 1rem;
     color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .hero-subtitle {
     font-size: 1.5rem;
     margin-bottom: 2rem;
     opacity: 0.9;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
 
 .cta-button {
@@ -104,11 +109,14 @@ h2 {
     font-size: 1.1rem;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .cta-button:hover {
     background: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0,0,0,0.15);
 }
 
 /* О системе */
@@ -125,15 +133,12 @@ h2 {
     line-height: 1.8;
 }
 
-.image-placeholder {
-    background: #ddd;
+.about-img {
+    width: 100%;
     height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    object-fit: cover;
     border-radius: 10px;
-    color: #666;
-    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 /* Возможности */
@@ -174,20 +179,46 @@ h2 {
 
 .version-card {
     background: white;
-    padding: 2rem;
+    padding: 0 0 2rem 0;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     border-top: 4px solid #e74c3c;
+    overflow: hidden;
+}
+
+.version-image {
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.version-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.version-image img:hover {
+    transform: scale(1.05);
 }
 
 .version-card h3 {
     color: #2c3e50;
+    margin-bottom: 1rem;
+    padding: 0 2rem;
+}
+
+.version-card p {
+    padding: 0 2rem;
     margin-bottom: 1rem;
 }
 
 .version-card ul {
     list-style: none;
     margin-top: 1rem;
+    padding: 0 2rem;
 }
 
 .version-card li {
@@ -198,6 +229,17 @@ h2 {
 .version-card li:before {
     content: "✓ ";
     color: #27ae60;
+    font-weight: bold;
+}
+
+.version-placeholder {
+    background: #667eea;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 
@@ -222,6 +264,12 @@ h2 {
     padding: 2rem;
     border-radius: 10px;
     backdrop-filter: blur(10px);
+    transition: transform 0.3s;
+}
+
+.advantage-item:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,0.15);
 }
 
 .advantage-item h4 {
@@ -296,5 +344,17 @@ footer {
     
     h2 {
         font-size: 2rem;
+    }
+    
+    .hero {
+        padding: 140px 0 80px;
+    }
+    
+    .about-img {
+        height: 250px;
+    }
+    
+    .version-image {
+        height: 180px;
     }
 }
